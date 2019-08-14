@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:showAsAction="never">
+    <item
+        android:checked="true"
+        app:showAsAction="ifRoom"
+        android:title="Using: MediaPlayer"
+        android:checkable="false"/>
+    <item android:title=""
+        android:icon="@android:drawable/ic_menu_more"
+        app:showAsAction="always|collapseActionView">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_MediaPlayer"
+                    android:checked="true"
+                    app:showAsAction="always"
+                    android:title="MediaPlayer" />
+                <item
+                    android:id="@+id/menu_IjkPlayer"
+                    app:showAsAction="always"
+                    android:title="IjkPlayer" />
+                <item
+                    android:id="@+id/menu_ExoPlayer"
+                    app:showAsAction="always"
+                    android:title="ExoPlayer" />
+            </group>
+        </menu>
+    </item>
+</menu>

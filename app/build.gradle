@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "org.salient.artvideoplayer"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v5', 'x86'
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        android.applicationVariants.all {
+            variant ->
+                variant.outputs.all {
+                    output ->
+                        def outputFile = output.outputFile
+                        if (outputFile.name.contains("release")) {
+                            outputFileName = new File("./", "artplayer-release.apk")
+                        } else if (outputFile.name.contains("debug")) {
+                            outputFileName = new File("./", "artplayer-debug.apk")
+                        }
+                }
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    dependencies {
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+        //design
+        implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+        implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+        //FlexboxLayout
+        implementation 'com.google.android:flexbox:1.0.0'
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'com.android.support.test:runner:1.0.2'
+        androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+        implementation 'com.google.code.gson:gson:2.8.5'
+        implementation 'com.github.bumptech.glide:glide:4.7.1'
+        debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+        releaseImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+        //releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+        testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+        //required
+        implementation project(':artplayer-java')
+        //default controller panel: optional
+        implementation project(':artplayer-ui')
+
+        //ExoPlayer : optional
+        //implementation "org.salient.artvideoplayer:artplayer-exo:$rootProject.libraryVersionName"
+        implementation project(':artplayer-exo')
+
+        //ijkPlayer : optional
+        implementation "org.salient.artvideoplayer:artplayer-armv7a:$rootProject.libraryVersionName"
+
+        //ijkPlayer : required for ijkPlayer, enough for most devices.
+        //implementation "org.salient.artvideoplayer:artplayer-ijk:$rootProject.libraryVersionName"
+        implementation project(':artplayer-ijk')
+
+        // Other ABIs for ijkPlayer : optional
+        implementation "org.salient.artvideoplayer:artplayer-armv5:$rootProject.libraryVersionName"
+        implementation "org.salient.artvideoplayer:artplayer-x86:$rootProject.libraryVersionName"
+        //implementation project(':artplayer-x86_64')
+        //implementation project(':artplayer-arm64')
+
+        //implementation "org.salient.artvideoplayer:artplayer-java:$rootProject.libraryVersionName"
+        //implementation "org.salient.artvideoplayer:artplayer-ui:$rootProject.libraryVersionName"
+    }
+}
+
