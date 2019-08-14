@@ -345,9 +345,9 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
         Log.i(TAG, "fffonSurfaceTextureDestroyed [" + "] " + surfaceTexture + " ------");
-        VideoView temp = getCurrentVideoView();
+        /*VideoView temp = getCurrentVideoView();
         temp.exitTinyWindow();
-        temp.exitFullscreen();
+        temp.exitFullscreen();*/
         return this.surfaceTexture == null;
     }
 

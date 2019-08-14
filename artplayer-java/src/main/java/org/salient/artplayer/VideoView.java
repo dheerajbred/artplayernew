@@ -428,7 +428,7 @@ public class VideoView extends FrameLayout {
         } else {
             setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
-        Utils.setRequestedOrientation(context, screenOrientation);
+        //Utils.setRequestedOrientation(context, screenOrientation);
 
         MediaPlayerManager.instance().updateState(MediaPlayerManager.instance().getPlayerState());
 
